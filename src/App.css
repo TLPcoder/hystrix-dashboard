@@ -1,0 +1,108 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.metrics ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.metrics li {
+  display: block;
+  text-align: left;
+  position: relative;
+  bottom: 20px;
+}
+.metrics{
+  float:left;
+}
+
+.chart {
+  float: right
+}
+
+.dashboard{
+  background-color: rgb(250, 249, 249);
+  border: rgba(226, 225, 225, 0.856) solid 1px;
+  border-radius: 5px;
+  border: black solid 1px;
+  height: 330px;
+  padding-top: 30px;
+  padding-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.button {
+  width:200px;
+  border: #0F6CA4 solid 1px;
+  color: #0F6CA4;
+  margin:5px;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button:hover{
+  background-color:white;
+  border: #0F6CA4 solid 1px;
+}
+
+.button:active{
+  color: #0F6CA4;
+  background-color:white;
+  border: #0F6CA4 solid 1px;
+}
+
+.selectors{
+  margin-top:30px;
+  margin-left:10%;
+}
+
+.cleatState{
+  border: rgb(243, 51, 51) solid 1px;
+  color: rgb(243, 51, 51);
+}
+
+.cleatState:hover{
+  background-color:white;
+  border:  rgb(243, 51, 51) solid 1px;
+}
+
+.cleatState:active{
+  color:  rgb(243, 51, 51);
+  background-color:white;
+  border:  rgb(243, 51, 51) solid 1px;
+}
