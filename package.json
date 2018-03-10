@@ -1,6 +1,6 @@
 {
   "name": "hystix-dashboard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "c3": "^0.4.21",
