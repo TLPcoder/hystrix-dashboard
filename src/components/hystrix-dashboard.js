@@ -10,18 +10,20 @@ class HystrixDashboard extends Component {
         this.state = {
           hystrixMetrics: {},
           dashboards: [],
-          current: []
+          current: [],
+          view: 'dashboard'
         }
     }
     componentDidMount = () => {
         let source = this.props.source || 'http://localhost:3000/hystrixStream'
         let stream = new EventSource(source);
+
         stream.onopen = () => {
             console.log('open')  
         };
 
         stream.onmessage = (e) => {
-            let json = JSON.parse(e.data);
+            let json = JSON.parse(e.data)
             let commandMetrics = this.state.hystrixMetrics[json.name]
 
             if (commandMetrics){
@@ -48,6 +50,11 @@ class HystrixDashboard extends Component {
         };
     }
 
+    changeView = (event) => {
+        let view = this.state.view === 'dashboard' ? 'dashboard1' : 'dashboard'
+        this.setState({view: view})
+    }
+
     cleanState(name){
         let commandMetrics = [...this.state.hystrixMetrics[name]]
         let windowLength = commandMetrics[0].metrics.windowLength
@@ -65,17 +72,16 @@ class HystrixDashboard extends Component {
         let dashboards = []
         for (let key in this.state.hystrixMetrics) {
             dashboards.push(
-                <Dashboard 
+                <Dashboard
+                  view={this.state.view} 
                   metrics={this.state.hystrixMetrics[key]} 
-                  data={ {
-                    columns: [
+                  data={ [
                           ['total', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.requestCount)],
                           ['timeout', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.rollingCountTimeout)],
                           ['success', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.rollingCountSuccess)],
                           ['error', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.errorCount)],
                           ['short circuit', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.rollingCountShortCircuited)],
                         ] 
-                      } 
                     }
                 />)
         }
@@ -102,6 +108,7 @@ class HystrixDashboard extends Component {
             <div id='outer-container'>
                 <div className = 'selectors'>
                     <Selectors state = {this.state} clearState={this.clearState} setState={(state) => this.setState(() => state)}/>
+                    <button className='button viewButton' onClick={this.changeView}>view</button>
                 </div>
                 <div id='page-wrap'>
                     {dashboards}

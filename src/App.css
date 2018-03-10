@@ -21,8 +21,8 @@ body {
   height: -webkit-fill-available
 }
 
-.no-dash{
-  margin:auto;
+.no-dash {
+  margin: auto;
   /* position:relative;
   top: 100px */
 }
@@ -49,9 +49,25 @@ body {
 }
 
 .dashboard {
-  margin-top:45px;
+  position: relative;
+  top: 80px;
   width: 80%;
-  margin-left: 10%;
+  margin-left: 8%;
+  background-color: rgb(250, 249, 249);
+  border: rgba(226, 225, 225, 0.856) solid 1px;
+  border-radius: 5px;
+  border: black solid 1px;
+  height: 330px;
+  padding-right: 20px;
+  margin-bottom: 20px;
+}
+
+.dashboard1 {
+  position: relative;
+  top: 80px;
+  margin-right: 2%;
+  width: 45%;
+  float: right;
   background-color: rgb(250, 249, 249);
   border: rgba(226, 225, 225, 0.856) solid 1px;
   border-radius: 5px;
@@ -71,8 +87,8 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 10px;
-  margin-top:10px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
 .button:hover {
@@ -80,10 +96,24 @@ body {
   border: #0F6CA4 solid 1px;
 }
 
-.button:active {
-  color: #0F6CA4;
+.viewButton {
+  float: right;
+  position: absolute;
+  ;
+  top: 20px;
+  border-radius: 5px;
+  right: 5px;
+  color: white;
+  padding: 10px 20px;
+  width: 100px;
+  background-color: #0F6CA4;
+  border: #0F6CA4 solid 1px;
+}
+
+.viewButton:hover {
   background-color: white;
   border: #0F6CA4 solid 1px;
+  color: #0F6CA4
 }
 
 /* .selectors {
@@ -98,8 +128,7 @@ body {
 } */
 
 .serviceName {
-  position: relative;
-  left: 40px;
+  text-align: right;
 }
 
 .cleatState {
@@ -124,9 +153,9 @@ body {
   bottom: 49px;
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1450px) {
   .c3 {
-    width: 75%
+    width: 70%
   }
 }
 
@@ -143,6 +172,20 @@ body {
   }
   .c3 {
     width: 100%
+  }
+  .dashboard1 {
+    position: relative;
+    top: 80px;
+    margin-right: 7%;
+    width: 80%;
+    margin-left: 10%;
+    background-color: rgb(250, 249, 249);
+    border: rgba(226, 225, 225, 0.856) solid 1px;
+    border-radius: 5px;
+    border: black solid 1px;
+    height: 330px;
+    padding-right: 20px;
+    margin-bottom: 20px;
   }
 }
 
@@ -181,7 +224,7 @@ body {
   background: #373a47;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
-  width:300px;
+  width: 300px;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -202,4 +245,3 @@ body {
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
-
