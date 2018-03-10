@@ -15,8 +15,8 @@ const Dashboard = (props) => {
 
     return (
         <div className='dashboard'>
+            <h3 className='serviceName'>{value('name')}</h3>
             <ul className='metrics'>
-                <li><h3>{value('name')}</h3></li>
                 <li style = {{color: circuitStatus() ? 'red' : 'black'}}>opened</li>
                 <li style = {{color: circuitStatus() ? 'black' : 'green'}}>closed</li>
                 <br/>

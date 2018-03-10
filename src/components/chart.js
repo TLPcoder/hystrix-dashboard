@@ -4,10 +4,7 @@ import 'c3/c3.css'
 
 const Chart = (props) => {
     return (
-        <C3Chart style={{
-                width: '80%',
-                float: 'right'
-            }}data={props.data}/>
+        <C3Chart data={props.data}/>
     )
 }
 

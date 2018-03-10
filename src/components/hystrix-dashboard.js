@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import '../App.css';
 import Dashboard from './dashboard'
 import Selectors from './selectors'
 
-class App extends Component {
+class HystrixDashboard extends Component {
     constructor(props){
         super(props)
         this.state = {
           hystrixMetrics: {},
-          dashbaords: [],
+          dashboards: [],
           current: []
         }
     }
     componentDidMount = () => {
-        let source = this.props.source || 'http://localhost:3000/hystrix'
+        let source = this.props.source || 'http://localhost:3000/hystrixStream'
         let stream = new EventSource(source);
         stream.onopen = () => {
             console.log('open')  
@@ -27,11 +27,10 @@ class App extends Component {
             if (commandMetrics){
                 let newState = this.cleanState(json.name)
                 newState.push({metrics: json, date: Date.now()})
-
                 this.setState(() => {
                   return {
                     hystrixMetrics: {...this.state.hystrixMetrics, [json.name]: newState},
-                    dashbaords: this.createDashboards()
+                    dashboards: this.createDashboards()
                   }
                 })
             } else {
@@ -39,7 +38,7 @@ class App extends Component {
                 this.setState(() => {
                   return {
                     hystrixMetrics: {...this.state.hystrixMetrics, [json.name]: newState},
-                    dashbaords: this.createDashboards()
+                    dashboards: this.createDashboards()
                   }
                 })
             }
@@ -84,32 +83,32 @@ class App extends Component {
     } 
 
     selectedServices = () => {
-        return this.state.dashbaords.filter((dash) => this.state.current.includes(dash.props.metrics[0].metrics.name))
+        return this.state.dashboards.filter((dash) => this.state.current.includes(dash.props.metrics[0].metrics.name))
     }
 
     clearState = () => {
         this.setState(() => {
             return {
                 hystrixMetrics: {},
-                dashbaords: [],
+                dashboards: [],
                 current: []
             }
         })
     }
 
     render() {
+        let dashboards = this.selectedServices().length ? this.selectedServices() : this.state.dashboards[Math.floor(Math.random() * this.state.dashboards.length)]
         return (
-            <div>
+            <div id='outer-container'>
                 <div className = 'selectors'>
-                    <Selectors state = {this.state} setState={(state) => this.setState(() => state)}/>
-                    <button className= 'button cleatState' onClick={this.clearState}>clear dashboards</button>
+                    <Selectors state = {this.state} clearState={this.clearState} setState={(state) => this.setState(() => state)}/>
                 </div>
-                <div className="App" style={{marginTop:'200px'}}>
-                    {this.selectedServices()}
+                <div id='page-wrap'>
+                    {dashboards}
                 </div>
             </div>
         );
     }
 }
 
-export default App;
+export default HystrixDashboard;

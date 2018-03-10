@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import HystrixDashboard from './components/hystrix-dashboard';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<HystrixDashboard />, document.getElementById('root'));
 registerServiceWorker();
