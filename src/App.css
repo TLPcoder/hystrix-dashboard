@@ -23,8 +23,12 @@ body {
 
 .no-dash {
   margin: auto;
-  /* position:relative;
-  top: 100px */
+  top: 100px
+}
+
+.serviceName {
+  position: relative;
+  left:40px
 }
 
 .metrics ul {
@@ -41,11 +45,16 @@ body {
 }
 
 .metrics {
+  position: absolute;
   float: left;
 }
 
 .chart {
   float: right
+}
+
+.c3{
+  top:-15px;
 }
 
 .dashboard {
@@ -57,7 +66,7 @@ body {
   border: rgba(226, 225, 225, 0.856) solid 1px;
   border-radius: 5px;
   border: black solid 1px;
-  height: 330px;
+  height: 370px;
   padding-right: 20px;
   margin-bottom: 20px;
 }
@@ -72,7 +81,7 @@ body {
   border: rgba(226, 225, 225, 0.856) solid 1px;
   border-radius: 5px;
   border: black solid 1px;
-  height: 330px;
+  height: 370px;
   padding-right: 20px;
   margin-bottom: 20px;
 }
@@ -127,10 +136,6 @@ body {
   overflow: overlay;
 } */
 
-.serviceName {
-  text-align: right;
-}
-
 .cleatState {
   border: rgb(243, 51, 51) solid 1px;
   color: rgb(243, 51, 51);
@@ -170,6 +175,10 @@ body {
     visibility: hidden;
     position: absolute;
   }
+  .serviceName {
+    left: 0px;
+    text-align: right;
+  }
   .c3 {
     width: 100%
   }
@@ -183,7 +192,6 @@ body {
     border: rgba(226, 225, 225, 0.856) solid 1px;
     border-radius: 5px;
     border: black solid 1px;
-    height: 330px;
     padding-right: 20px;
     margin-bottom: 20px;
   }
