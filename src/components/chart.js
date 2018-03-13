@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import C3Chart from 'react-c3js';
 import c3  from 'c3'
 import 'c3/c3.css'
 
@@ -26,6 +25,14 @@ class Chart extends Component{
         this.state.chart.load({
             columns: nextProps.data
         })
+    }
+
+    shouldComponentUpdate = () => {
+        if(this.props.current.includes(this.props.name)){
+            return true
+        } else {
+            return false
+        }
     }
 
     render = () => {

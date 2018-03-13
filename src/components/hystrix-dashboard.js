@@ -74,6 +74,7 @@ class HystrixDashboard extends Component {
             dashboards.push(
                 <Dashboard
                   view={this.state.view} 
+                  current={this.state.current}
                   metrics={this.state.hystrixMetrics[key]} 
                   data={ [
                           ['total', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.requestCount)],

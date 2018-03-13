@@ -33,7 +33,7 @@ const Dashboard = (props) => {
                     <li>99: {Math.floor(value('latencyExecute')['99'])}</li>
                 </ul>
             </ul>
-            <Chart className='chart' name={value('name')} data={props.data}/>
+            <Chart className='chart' current={props.current} name={value('name')} data={props.data}/>
         </div>
     )
 }
