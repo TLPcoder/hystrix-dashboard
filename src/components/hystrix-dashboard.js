@@ -9,7 +9,7 @@ class HystrixDashboard extends Component {
         super(props)
         this.state = {
           hystrixMetrics: {},
-          dashboards: [],
+          dashboards: {},
           current: [],
           view: 'dashboard'
         }
@@ -32,7 +32,7 @@ class HystrixDashboard extends Component {
                 this.setState(() => {
                   return {
                     hystrixMetrics: {...this.state.hystrixMetrics, [json.name]: newState},
-                    dashboards: this.createDashboards()
+                    dashboards: {...this.state.dashboards, [json.name]: this.createDashboards(json.name)}
                   }
                 })
             } else {
@@ -40,7 +40,7 @@ class HystrixDashboard extends Component {
                 this.setState(() => {
                   return {
                     hystrixMetrics: {...this.state.hystrixMetrics, [json.name]: newState},
-                    dashboards: this.createDashboards()
+                    dashboards: {...this.state.dashboards, [json.name]: this.createDashboards(json.name)}
                   }
                 })
             }
@@ -68,43 +68,44 @@ class HystrixDashboard extends Component {
         return commandMetrics
     }
 
-    createDashboards = () => {
-        let dashboards = []
-        for (let key in this.state.hystrixMetrics) {
-            dashboards.push(
-                <Dashboard
-                  view={this.state.view} 
-                  current={this.state.current}
-                  metrics={this.state.hystrixMetrics[key]} 
-                  data={ [
-                          ['total', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.requestCount)],
-                          ['timeout', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.rollingCountTimeout)],
-                          ['success', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.rollingCountSuccess)],
-                          ['error', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.errorCount)],
-                          ['short circuit', ...this.state.hystrixMetrics[key].map(({metrics}) => metrics.rollingCountShortCircuited)],
+    createDashboards = (service) => {
+        if(this.state.hystrixMetrics[service]){
+            return <Dashboard view={this.state.view}  current={this.state.current} metrics={this.state.hystrixMetrics[service]} 
+                data={
+                        [
+                            ['total', ...this.state.hystrixMetrics[service].map(({metrics}) => metrics.requestCount)],
+                            ['timeout', ...this.state.hystrixMetrics[service].map(({metrics}) => metrics.rollingCountTimeout)],
+                            ['success', ...this.state.hystrixMetrics[service].map(({metrics}) => metrics.rollingCountSuccess)],
+                            ['error', ...this.state.hystrixMetrics[service].map(({metrics}) => metrics.errorCount)],
+                            ['short circuit', ...this.state.hystrixMetrics[service].map(({metrics}) => metrics.rollingCountShortCircuited)],
                         ] 
-                    }
-                />)
-        }
-        return dashboards
+                    }/>
+        }        
     } 
 
     selectedServices = () => {
-        return this.state.dashboards.filter((dash) => this.state.current.includes(dash.props.metrics[0].metrics.name))
+        let services = [];
+        Object.keys(this.state.dashboards).forEach(dashName => {
+            if(this.state.current.includes(dashName)){
+                services.push(this.state.dashboards[dashName])
+            }
+        })
+        return services
     }
 
     clearState = () => {
         this.setState(() => {
             return {
                 hystrixMetrics: {},
-                dashboards: [],
+                dashboards: {},
                 current: []
             }
         })
     }
 
     render() {
-        let dashboards = this.selectedServices().length ? this.selectedServices() : this.state.dashboards[Math.floor(Math.random() * this.state.dashboards.length)]
+
+        let dashboards = this.selectedServices()
         return (
             <div id='outer-container'>
                 <div className = 'selectors'>
