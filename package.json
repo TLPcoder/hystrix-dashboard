@@ -1,7 +1,8 @@
 {
   "name": "hystix-dashboard",
-  "version": "0.2.0",
+  "version": "0.0.1",
   "private": true,
+  "main": "./src/components/hystrix-dashboard",
   "dependencies": {
     "c3": "^0.4.21",
     "react": "^16.2.0",
